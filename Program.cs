@@ -1,12 +1,30 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore;
 
 namespace SuncoastMovies
 {
-  class Program
-  {
-    static void Main(string[] args)
+    class Movie
     {
-      Console.WriteLine("Welcome to C#");
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string PrimaryDirector { get; set; }
+        public int YearReleased { get; set; }
+        public string Genre { get; set; }
     }
-  }
+    class SuncoastMoviesContext : DbContext  //Colon means is a kind of, so SuncoastMoviesContext is a kind of Database Context
+
+    {
+        public DbSet<Movie> Movies { get; set; } //Movies is table
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseNpgsql("server=localhost;database=SuncoastMovies");
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Welcome to C#");
+        }
+    }
 }
