@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
 namespace SuncoastMovies
@@ -24,7 +25,9 @@ namespace SuncoastMovies
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to C#");
+            var context = new SuncoastMoviesContext();
+            var moviesCount = context.Movies.Count();
+            Console.WriteLine($"There are {moviesCount} movies!");
         }
     }
 }
